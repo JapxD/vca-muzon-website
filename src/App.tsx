@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import NavBar from "./components/NavBar";
 import NavBarItem from "./components/NavBarItem";
 import vcaLogo from "./assets/vca-logo.png";
@@ -17,7 +19,9 @@ function App() {
   return (
     <>
       <NavBar padding={wholePadding}>
-        <img src={vcaLogo} className="w-50" />
+        <Link to="/">
+          <img src={vcaLogo} className="w-50" />
+        </Link>
         <div className="w-fit flex justify-end gap-25">
           {navBarItems.map((navBarItem) => (
             <NavBarItem
