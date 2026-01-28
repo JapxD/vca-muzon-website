@@ -1,35 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import NavBar from "./components/NavBar";
+import NavBarItem from "./components/NavBarItem";
+import vcaLogo from "./assets/vca-logo.png";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const wholePadding = 24;
+  const navBarItems = [
+    {
+      title: "Home",
+      to: "/",
+    },
+    { title: "Who we are", to: "/who-we-are" },
+    { title: "Online", to: "/online" },
+    { title: "Give", to: "/give" },
+  ];
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <NavBar padding={wholePadding}>
+        <img src={vcaLogo} className="w-50" />
+        <div className="w-fit flex justify-end gap-25">
+          {navBarItems.map((navBarItem) => (
+            <NavBarItem
+              key={navBarItem.title}
+              title={navBarItem.title}
+              to={navBarItem.to}
+            />
+          ))}
+        </div>
+      </NavBar>
+      <div className={`w-full px-${wholePadding} z-1`}></div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
