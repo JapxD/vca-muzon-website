@@ -1,20 +1,12 @@
 import { Link } from "react-router-dom";
 
 interface HeroSectionProp {
-  heading?: string;
   paragraph?: string;
   cta?: string;
   image?: string;
-  onClick?: () => void;
 }
 
-const HeroSection = ({
-  heading,
-  paragraph,
-  cta,
-  image,
-  onClick,
-}: HeroSectionProp) => {
+const HeroSection = ({ paragraph, cta, image }: HeroSectionProp) => {
   return (
     <section className="w-full h-fit md:h-110 lg:h-150 flex flex-col sm:flex-row gap-10 overflow-visible py-3">
       <div className="w-fit flex flex-col items-start gap-5 md:gap-6 xl:gap-11">
