@@ -55,7 +55,7 @@ function App() {
         className="fixed bottom-10 text-sm right-10 p-3 rounded-xl shadow-[0_4px_4px_0_rgba(0,0,0,.30)] hover:cursor-pointer
           transition-all duration-150 hover:-translate-y-2 hover:shadow-[0_10px_15px_0_rgba(0,0,0,.30)]"
       >
-        Help me improve this site →
+        Help us improve this site →
       </Link>
     </>
   );
