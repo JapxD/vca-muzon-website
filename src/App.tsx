@@ -1,11 +1,9 @@
-import { Link } from "react-router-dom";
-
+import { Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
-import NavBarItem from "./components/NavBarItem";
+import Home from "./pages/Home";
 import vcaLogo from "./assets/vca-logo.png";
 
 function App() {
-  const wholePadding = 24;
   const navBarItems = [
     {
       title: "Home",
@@ -16,23 +14,39 @@ function App() {
     { title: "Give", to: "/give" },
   ];
 
+  const routes = [
+    { path: "/", element: <Home /> },
+    { path: "/who-we-are" },
+    { path: "/online" },
+    { path: "/give" },
+  ];
+
   return (
     <>
-      <NavBar padding={wholePadding}>
-        <Link to="/">
-          <img src={vcaLogo} className="w-50" />
-        </Link>
-        <div className="w-fit flex justify-end gap-25">
-          {navBarItems.map((navBarItem) => (
-            <NavBarItem
-              key={navBarItem.title}
-              title={navBarItem.title}
-              to={navBarItem.to}
-            />
+      <NavBar logo={vcaLogo} navBarItems={navBarItems} />
+
+      {/* Routes */}
+      <div className={`w-full px-[50px] z-1 overflow-hidden xl:px-[150px]`}>
+        <Routes>
+          {routes.map((route) => (
+            <Route path={route.path} element={route.element} />
           ))}
-        </div>
-      </NavBar>
-      <div className={`w-full px-${wholePadding} z-1`}></div>
+          <Route
+            path="*"
+            element={
+              <div style={{ textAlign: "center", marginTop: "2rem" }}>
+                <h2>Page not found</h2>
+                <button
+                  className="btn btn-primary mt-2"
+                  onClick={() => window.history.back()}
+                >
+                  Go Back
+                </button>
+              </div>
+            }
+          />
+        </Routes>
+      </div>
     </>
   );
 }
