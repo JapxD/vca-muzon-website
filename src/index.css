@@ -3,6 +3,26 @@
 :root {
   --font-heading: "Antonio", sans-serif;
   --font-body: "Inter", sans-serif;
+
+  /* Brand Colors */
+  --color-primary: #1f3a6d; /* VCA Blue (Logo) */
+  --color-primary-dark: #0e1626; /* Dark Navy (Hero/Footer) */
+
+  /* Accent Colors */
+  --color-accent: #f2b705; /* Gold Accent (CTA Buttons) */
+  --color-accent-soft: #3fb6a8; /* Optional Teal Accent */
+
+  /* Background Colors */
+  --color-bg-light: #f4f7fb; /* Light Section Background */
+  --color-bg-white: #ffffff;
+
+  /* Text Colors */
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #6b7280;
+  --color-text-light: #ffffff;
+
+  /* UI Colors */
+  --color-border-light: #e5e7eb;
 }
 
 h1 {
