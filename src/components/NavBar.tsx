@@ -19,17 +19,14 @@ const NavBar = ({ logo, navBarItems }: NavBarProp) => {
   const [barsOpen, setBarsOpen] = useState(false);
 
   return (
-    <nav
-      className="relative w-full h-[98px] top-0 z-50 flex justify-between items-center
-            sticky shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] bg-white px-[50px] xl:px-[150px]"
-    >
+    <nav className="fixed w-full h-[98px] top-0 z-50 flex justify-between items-center shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] bg-transparent px-[50px] xl:px-[150px] text-white">
       <Link to="/">
         <img src={logo} className="w-30 md:w-50" />
       </Link>
 
       {/* Sidebard for mobile */}
       <div
-        className={`fixed md:hidden top-[98px] right-0 w-50 h-60 bg-white flex flex-col text-small items-start justify-evenly px-8 py-5 rounded-bl-xl 
+        className={`fixed md:hidden top-[98px] right-0 w-50 h-60 flex flex-col text-small items-start justify-evenly px-8 py-5 rounded-bl-xl 
             shadow-[-4px_4px_4px_0_rgba(0,0,0,0.25)] z-index-999 transition-all duration-300 
             ${barsOpen ? "translate-x-0 opacity-100 pointer-events-auto" : "translate-x-full opacity-0 pointer-events-none "}`}
       >
