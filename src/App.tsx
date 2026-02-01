@@ -2,6 +2,7 @@ import { Link, Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
 import vcaLogo from "./assets/vca-logo.png";
+import vcaLogoWhite from "./assets/vca-logo-white.png";
 
 function App() {
   const navBarItems = [
@@ -23,10 +24,10 @@ function App() {
 
   return (
     <>
-      <NavBar logo={vcaLogo} navBarItems={navBarItems} />
+      <NavBar logo={vcaLogoWhite} navBarItems={navBarItems} />
 
       {/* Routes */}
-      <div className={`w-full px-[50px] z-1 overflow-hidden xl:px-[150px]`}>
+      <div className={`w-full z-1 overflow-hidden`}>
         <Routes>
           {routes.map((route) => (
             <Route path={route.path} element={route.element} />
@@ -48,7 +49,7 @@ function App() {
         </Routes>
       </div>
       <Link
-        to={"https://forms.gle/6a1bfj5hMVKXuDc17"}
+        to=""
         target="_blank"
         className="fixed bottom-10 text-sm right-10 p-3 rounded-xl shadow-[0_4px_4px_0_rgba(0,0,0,.30)] hover:cursor-pointer
           transition-all duration-150 hover:-translate-y-2 hover:shadow-[0_10px_15px_0_rgba(0,0,0,.30)]"
