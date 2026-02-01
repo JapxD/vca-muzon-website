@@ -1,12 +1,16 @@
 import { Link } from "react-router-dom";
 
-interface HeroSectionProp {
+interface LeftRightHeroSectionProp {
   paragraph?: string;
   cta?: string;
   image?: string;
 }
 
-const HeroSection = ({ paragraph, cta, image }: HeroSectionProp) => {
+const LeftRightHeroSection = ({
+  paragraph,
+  cta,
+  image,
+}: LeftRightHeroSectionProp) => {
   return (
     <section className="w-full h-fit md:h-110 lg:h-150 flex flex-col sm:flex-row gap-10 overflow-visible py-3">
       <div className="w-fit flex flex-col items-start gap-5 md:gap-6 xl:gap-11">
@@ -44,4 +48,4 @@ const HeroSection = ({ paragraph, cta, image }: HeroSectionProp) => {
   );
 };
 
-export default HeroSection;
+export default LeftRightHeroSection;

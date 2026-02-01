@@ -48,7 +48,7 @@ const NavBar = ({ logo, navBarItems }: NavBarProp) => {
       </div>
 
       {/* Navbar Desktop */}
-      <div className="hidden md:flex gap-15 lg:gap-25 w-full max-w-220 grow justify-end text-normal">
+      <div className="hidden md:flex gap-15 lg:gap-25 w-full max-w-220 grow justify-end text-normal [&>a::after]:bg-white">
         {navBarItems &&
           navBarItems.map((navBarItem) => (
             <NavBarItem
