@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 import NavBarItem from "../components/NavBarItem";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 interface NavBarItemType {
   title: string;
@@ -26,10 +27,16 @@ const NavBar = ({ logo, navBarItems }: NavBarProp) => {
 
       {/* Sidebard for mobile */}
       <div
-        className={`fixed md:hidden top-[98px] right-0 w-50 h-60 flex flex-col text-small items-start justify-evenly px-8 py-5 rounded-bl-xl 
-            shadow-[-4px_4px_4px_0_rgba(0,0,0,0.25)] z-index-999 transition-all duration-300 
+        className={`fixed md:hidden top-0 right-0 w-50 h-full flex flex-col text-small items-start justify-start bg-white text- gap-10 px-8 py-15
+            z-index-999 transition-all duration-300 text-[var(--color-text-primary)] [&>a::after]:bg-[var(--color-text-primary)]
             ${barsOpen ? "translate-x-0 opacity-100 pointer-events-auto" : "translate-x-full opacity-0 pointer-events-none "}`}
       >
+        <button onClick={() => setBarsOpen(!barsOpen)}>
+          <FontAwesomeIcon
+            className="absolute top-5 right-5 cursor-pointer text-[var(--text-muted)] hover:text-[var(--text)] hover:scale-110 transition duration-200"
+            icon={faXmark}
+          />
+        </button>
         {navBarItems &&
           navBarItems.map((navBarItem) => (
             <NavBarItem
