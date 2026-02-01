@@ -1,14 +1,15 @@
-import HeroSection from "../components/HeroSection";
-import womenHappy from "../assets/women-happy.jpg";
+import FullImageHeroSection from "../components/FullImageHeroSection";
+import blessedToBless from "../assets/blessed-to-bless.jpg";
+import blaze from "../assets/blaze.jpg";
 
 const Home = () => {
   const paragraph =
-    "We’re a church family that loves God and cares about people. No matter where you are in life, you’re welcome here. Come worship with us, meet new friends, and feel at home from your very first visit.";
+    "We’re a church family that loves God and loves people. Wherever you are in life, you’re welcome here. Come worship with us and find a place to belong.";
   const cta = "Get Directions";
 
   return (
-    <div className="w-full mt-10">
-      <HeroSection paragraph={paragraph} image={womenHappy} cta={cta} />
+    <div className="w-full">
+      <FullImageHeroSection image={blessedToBless} />
     </div>
   );
 };
