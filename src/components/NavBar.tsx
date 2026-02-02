@@ -20,7 +20,7 @@ interface NavBarProp {
   navBarItems?: NavBarItemType[];
 }
 
-const NavBar = ({ logo, navBarItems }: NavBarProp) => {
+const NavBar = ({ navBarItems }: NavBarProp) => {
   const [barsOpen, setBarsOpen] = useState(false);
   const { heroVisible } = useScrolContext();
 
