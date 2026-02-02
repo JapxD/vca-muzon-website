@@ -1,10 +1,23 @@
+import { useScrolContext } from "../contexts/ScrollContext";
+import { useInView } from "../hooks/useInView";
+import { useEffect } from "react";
+
 interface FullImageHeroSectionProp {
   image: string;
 }
 
 const FullImageHeroSection = ({ image }: FullImageHeroSectionProp) => {
+  const { ref, isVisible } = useInView({ threshold: 0.2, once: false });
+  const { setHeroVisible } = useScrolContext();
+
+  useEffect(() => {
+    setHeroVisible(isVisible);
+  }, [isVisible]);
   return (
-    <section className="relative h-screen flex items-center justify-center text-white">
+    <section
+      ref={ref}
+      className="relative h-screen flex items-center justify-center text-white"
+    >
       <img
         src={image}
         className="absolute inset-0 w-full h-full object-cover"
