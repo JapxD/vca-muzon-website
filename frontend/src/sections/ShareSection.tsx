@@ -6,7 +6,7 @@ const ShareSection = () => {
   return (
     <section className="w-full h-fit md:h-110 md:h-100 xl:h-200 flex flex-col sm:flex-row gap-10 overflow-visible py-5 xl:px-15 bg-[var(--color-primary)]/90 text-white">
       {/* Left Image */}
-      <div className="hidden w-full lg:flex justify-center self-center h-[70%]">
+      <div className="hidden w-full lg:flex justify-center self-center md:h-[50%] 2xl:h-[70%]">
         <LatestSermon />
       </div>
 

@@ -4,7 +4,7 @@ import churchStage from "../assets/church-stage.jpg";
 const InviteSection = () => {
   return (
     <section className="w-full h-fit md:h-110 xl:h-200 flex flex-col sm:flex-row gap-10 overflow-visible xl:px-15">
-      <div className="w-full flex flex-col justify-center items-start px-10">
+      <div className="w-full flex flex-col justify-center items-start px-10 py-5">
         <h1 className="text-4xl xl:text-7xl bg-[var(--color-primary)] p-3 uppercase text-white rounded-lg">
           Invite
         </h1>
