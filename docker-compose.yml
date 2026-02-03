@@ -36,6 +36,10 @@ services:
     environment:
       VITE_YOUTUBE_CHANNEL_ID: ${VITE_YOUTUBE_CHANNEL_ID}
       VITE_YOUTUBE_API_KEY: ${VITE_YOUTUBE_API_KEY}
+    volumes:
+      - ./frontend:/app # mount source code
+      - /app/node_modules # keep node_modules inside container
+    command: ["npm", "run", "dev", "--", "--host"]
     # environment:
     #   REACT_APP_API_URL: http://localhost:3000
     # depends_on:
