@@ -1,0 +1,29 @@
+import churchStage from "../assets/church-stage.jpg";
+import LatestSermon from "../components/LatestSermon";
+import Socials from "../components/Socials";
+
+const ShareSection = () => {
+  return (
+    <section className="w-full h-fit md:h-110 md:h-100 xl:h-200 flex flex-col sm:flex-row gap-10 overflow-visible py-5 xl:px-15 bg-[var(--color-primary)]/90 text-white">
+      {/* Left Image */}
+      <div className="hidden w-full lg:flex justify-center self-center h-[70%]">
+        <LatestSermon />
+      </div>
+
+      <div className="w-full flex flex-col justify-center items-end px-10">
+        <h1 className="text-4xl xl:text-7xl border border-[var(--color-accent)] p-3 uppercase rounded-lg">
+          Share
+        </h1>
+        <p className="py-2 xl:text-2xl">Our social media posts!</p>
+        <h2 className="text-3xl md:text-4xl xl:text-5xl font-bold py-2 xl:py-4 text-right">
+          Follow us on Facebook, <br /> Instagram and Youtube!
+        </h2>
+        <div className="text-sm xl:text-xl">
+          <Socials />
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default ShareSection;

@@ -3,7 +3,7 @@ import churchStage from "../assets/church-stage.jpg";
 
 const InviteSection = () => {
   return (
-    <section className="w-full h-fit md:h-110 xl:h-200 flex flex-col sm:flex-row gap-10 overflow-visible py-20 xl:px-15">
+    <section className="w-full h-fit md:h-110 xl:h-200 flex flex-col sm:flex-row gap-10 overflow-visible xl:px-15">
       <div className="w-full flex flex-col justify-center items-start px-10">
         <h1 className="text-4xl xl:text-7xl bg-[var(--color-primary)] p-3 uppercase text-white rounded-lg">
           Invite
@@ -37,7 +37,7 @@ const InviteSection = () => {
         <img
           src={churchStage}
           alt="church-stage"
-          className="w-[130%] max-w-none h-full object-cover -mr-[20%] rounded-xl"
+          className="w-[130%] max-w-none h-full object-cover -mr-[20%]"
         />
       </div>
     </section>

@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:16
+    container_name: vca_muzon_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: vca_admin
+      POSTGRES_PASSWORD: StrongPasswordHere
+      POSTGRES_DB: vca_muzon_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    container_name: vca_muzon_backend
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: vca_admin
+      DB_PASSWORD: StrongPasswordHere
+      DB_NAME: vca_muzon_db
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    container_name: vca_muzon_frontend
+    restart: always
+    ports:
+      - "5173:5173" # or 3001 depending on your React dev server
+    environment:
+      REACT_APP_API_URL: http://localhost:3000
+    depends_on:
+      - backend
