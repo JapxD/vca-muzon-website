@@ -1,12 +1,9 @@
 import { useScrolContext } from "../contexts/ScrollContext";
 import { useInView } from "../hooks/useInView";
 import { useEffect } from "react";
+import blessedToBless from "../assets/blessed-to-bless.jpg";
 
-interface FullImageHeroSectionProp {
-  image: string;
-}
-
-const FullImageHeroSection = ({ image }: FullImageHeroSectionProp) => {
+const FullImageHeroSection = () => {
   const { ref, isVisible } = useInView({ threshold: 0.2, once: false });
   const { setHeroVisible } = useScrolContext();
 
@@ -19,7 +16,7 @@ const FullImageHeroSection = ({ image }: FullImageHeroSectionProp) => {
       className="relative h-screen flex items-center justify-center text-white"
     >
       <img
-        src={image}
+        src={blessedToBless}
         className="absolute inset-0 w-full h-full object-cover"
         alt="Church worship"
       />
