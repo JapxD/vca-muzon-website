@@ -1,9 +1,23 @@
 import { Route, Routes } from "react-router-dom";
+import { useState } from "react";
 import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
+import Login from "./pages/Login.tsx";
 import { ScrollProvider } from "./contexts/ScrollContext.tsx";
+import Modal from "./components/Modal.tsx";
+import ModalTextArea from "./components/ModalTextArea";
+import ModalInput from "./components/ModalInput";
+import Button from "./components/Button";
 
 function App() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [summary, setSummary] = useState("");
+  const [description, setDescription] = useState("");
+
+  // handlers
+  const handleModalSave = async () => {};
+  const handleLogin = () => {};
+
   const navBarItems = [
     {
       title: "Home",
@@ -12,6 +26,7 @@ function App() {
     { title: "Who we are", to: "/who-we-are" },
     { title: "Online", to: "/online" },
     { title: "Give", to: "/give" },
+    { title: "Login", to: "/login" },
   ];
 
   const routes = [
@@ -19,6 +34,7 @@ function App() {
     { path: "/who-we-are" },
     { path: "/online" },
     { path: "/give" },
+    { path: "/login", element: <Login /> },
   ];
 
   return (
@@ -48,14 +64,40 @@ function App() {
             />
           </Routes>
         </div>
-        {/* <Link
-          to=""
-          target="_blank"
-          className="fixed bottom-10 text-sm right-10 p-3 rounded-xl shadow-[0_4px_4px_0_rgba(0,0,0,.30)] hover:cursor-pointer
-          transition-all duration-150 hover:-translate-y-2 hover:shadow-[0_10px_15px_0_rgba(0,0,0,.30)]"
+
+        {/* Add Suggestions Button */}
+        <Modal
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          title="Suggest improvements!"
         >
-          Help us improve this site →
-        </Link> */}
+          <div className="flex flex-col w-full justify-left gap-5 py-2">
+            <ModalInput
+              value={summary}
+              onChange={setSummary}
+              placeholder="Write Suggestions"
+              label="Summary Suggestion"
+            />
+            <ModalTextArea
+              value={description}
+              onChange={setDescription}
+              placeholder="Write Task Description"
+              label="Task Description"
+              row={4}
+            />
+
+            <div className="self-end flex gap-4">
+              <Button title="Save" handleClick={handleModalSave}></Button>
+            </div>
+          </div>
+        </Modal>
+
+        <Button
+          className="fixed bottom-10 text-sm right-10 p-3 bg-white/50 rounded-xl shadow-[0_4px_4px_0_rgba(0,0,0,.30)] hover:cursor-pointer
+          transition-all duration-150 hover:-translate-y-2 hover:shadow-[0_10px_15px_0_rgba(0,0,0,.30)"
+          title="Help us improve this site →"
+          handleClick={() => setIsOpen(true)}
+        />
       </ScrollProvider>
     </>
   );
