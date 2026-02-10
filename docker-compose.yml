@@ -25,6 +25,8 @@ services:
     #   DB_USER: vca_admin
     #   DB_PASSWORD: vca_admin
     #   DB_NAME: vca_muzon_db
+    
+    command: ["npm", "run", "dev", "--", "--host"]
     depends_on:
       - db
 
