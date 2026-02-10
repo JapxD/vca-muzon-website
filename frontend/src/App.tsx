@@ -9,6 +9,8 @@ import ModalTextArea from "./components/ModalTextArea";
 import ModalInput from "./components/ModalInput";
 import Button from "./components/Button";
 import { suggestionSchema } from "./schemas/Suggestions.ts";
+import { submitSuggestion } from "./services/jiraApi.ts";
+import Spinner from "./components/Spinner.tsx";
 
 
 function App() {
@@ -17,6 +19,7 @@ function App() {
   const [description, setDescription] = useState("");
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<{ summary?: string; description?: string }>({});
+  const [modalLoading, setModalLoading] = useState(false);
 
 
   // Prevent background scroll when modal is open
@@ -33,6 +36,7 @@ function App() {
 
   // Handle modal save with validation
   const handleModalSave = async () => {
+    setMessage("");
     const result = suggestionSchema.safeParse({ summary, description });
     if (!result.success) {
       const fieldErrors: Record<string, string> = {};
@@ -43,11 +47,23 @@ function App() {
       setErrors(fieldErrors);
       setMessage("❌ Invalid input. Please check the fields.");
     } else {
-      setMessage("✅ Valid input, ready to send to JIRA!");
-      // call your API here...
-      setIsOpen(false);
+
+      try {
+        setModalLoading(true);
+        await submitSuggestion(summary, description)
+          .then(({message: jiraMessage}) => {
+            setMessage(`✅ ${jiraMessage}`);
+          });
+        
       setSummary("");
       setDescription("");
+      } catch (error: any) {
+        setMessage(`❌ Failed to submit suggestion: ${error.message}`);
+      }finally {
+        setErrors({});
+        setModalLoading(false);
+      }
+      
     }
   };
 
@@ -125,12 +141,12 @@ function App() {
               message={errors.description}
             />
             <div className="self-end flex gap-4">
+              {modalLoading && <Spinner />}
               <p className="self-center">{message}</p>
               <Button title="Save" handleClick={handleModalSave}></Button>
             </div>
           </div>
         </Modal>
-
         <Button
           className="fixed bottom-10 text-sm right-10 p-3 bg-white/50 rounded-xl shadow-[0_4px_4px_0_rgba(0,0,0,.30)] hover:cursor-pointer
           transition-all duration-150 hover:-translate-y-2 hover:shadow-[0_10px_15px_0_rgba(0,0,0,.30)"
