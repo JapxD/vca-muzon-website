@@ -1,4 +1,3 @@
-import churchStage from "../assets/church-stage.jpg";
 import LatestSermon from "../components/LatestSermon";
 import Socials from "../components/Socials";
 
