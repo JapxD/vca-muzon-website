@@ -12,20 +12,21 @@ services:
     volumes:
       - ./postgres_data:/var/lib/postgresql/data
 
-  # backend:
-  #   build: ./backend
-  #   container_name: vca_muzon_backend
-  #   restart: always
-  #   ports:
-  #     - "3000:3000"
-  #   environment:
-  #     DB_HOST: db
-  #     DB_PORT: 5432
-  #     DB_USER: vca_admin
-  #     DB_PASSWORD: vca_admin
-  #     DB_NAME: vca_muzon_db
-  #   depends_on:
-  #     - db
+  backend:
+    build: ./backend
+    container_name: vca_muzon_backend
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: 3000
+    #   DB_HOST: db
+    #   DB_PORT: 5432
+    #   DB_USER: vca_admin
+    #   DB_PASSWORD: vca_admin
+    #   DB_NAME: vca_muzon_db
+    depends_on:
+      - db
 
   frontend:
     build: ./frontend
@@ -36,11 +37,14 @@ services:
     environment:
       VITE_YOUTUBE_CHANNEL_ID: ${VITE_YOUTUBE_CHANNEL_ID}
       VITE_YOUTUBE_API_KEY: ${VITE_YOUTUBE_API_KEY}
+      VITE_JIRA_BASE_URL: ${VITE_JIRA_BASE_URL}
+      VITE_JIRA_PROJECT_KEY: ${VITE_JIRA_PROJECT_KEY}
+      VITE_JIRA_EMAIL: ${VITE_JIRA_EMAIL}
+      VITE_JIRA_API_TOKEN: ${VITE_JIRA_API_TOKEN}
+      VITE_APP_API_URL: http://localhost:3000
     volumes:
       - ./frontend:/app # mount source code
       - /app/node_modules # keep node_modules inside container
     command: ["npm", "run", "dev", "--", "--host"]
-    # environment:
-    #   REACT_APP_API_URL: http://localhost:3000
-    # depends_on:
-    #   - backend
+    depends_on:
+      - backend
