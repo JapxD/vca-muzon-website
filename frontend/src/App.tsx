@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
 import Login from "./pages/Login.tsx";
@@ -13,6 +13,17 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [summary, setSummary] = useState("");
   const [description, setDescription] = useState("");
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    } // Cleanup when component unmounts
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpen]);
 
   // handlers
   const handleModalSave = async () => {};
@@ -76,13 +87,13 @@ function App() {
               value={summary}
               onChange={setSummary}
               placeholder="Write Suggestions"
-              label="Summary Suggestion"
+              label="Suggestion"
             />
             <ModalTextArea
               value={description}
               onChange={setDescription}
-              placeholder="Write Task Description"
-              label="Task Description"
+              placeholder="Write Description"
+              label="Description"
               row={4}
             />
 
