@@ -8,12 +8,18 @@ import Modal from "./components/Modal.tsx";
 import ModalTextArea from "./components/ModalTextArea";
 import ModalInput from "./components/ModalInput";
 import Button from "./components/Button";
+import { suggestionSchema } from "./schemas/Suggestions.ts";
+
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [summary, setSummary] = useState("");
   const [description, setDescription] = useState("");
+  const [message, setMessage] = useState("");
+  const [errors, setErrors] = useState<{ summary?: string; description?: string }>({});
 
+
+  // Prevent background scroll when modal is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -25,9 +31,29 @@ function App() {
     };
   }, [isOpen]);
 
-  // handlers
-  const handleModalSave = async () => {};
-  const handleLogin = () => {};
+  // Handle modal save with validation
+  const handleModalSave = async () => {
+    const result = suggestionSchema.safeParse({ summary, description });
+    if (!result.success) {
+      const fieldErrors: Record<string, string> = {};
+      result.error.issues.forEach((issue) => {
+        const field = issue.path[0] as string;
+        fieldErrors[field] = issue.message;
+      });
+      setErrors(fieldErrors);
+      setMessage("❌ Invalid input. Please check the fields.");
+    } else {
+      setMessage("✅ Valid input, ready to send to JIRA!");
+      // call your API here...
+      setIsOpen(false);
+      setSummary("");
+      setDescription("");
+    }
+  };
+
+
+  const handleLogin = () => {
+  };
 
   const navBarItems = [
     {
@@ -88,6 +114,7 @@ function App() {
               onChange={setSummary}
               placeholder="Write Suggestions"
               label="Suggestion"
+              message={errors.summary}
             />
             <ModalTextArea
               value={description}
@@ -95,9 +122,10 @@ function App() {
               placeholder="Write Description"
               label="Description"
               row={4}
+              message={errors.description}
             />
-
             <div className="self-end flex gap-4">
+              <p className="self-center">{message}</p>
               <Button title="Save" handleClick={handleModalSave}></Button>
             </div>
           </div>

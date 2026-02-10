@@ -4,6 +4,7 @@ interface ModalTextAreaProp {
   label?: string;
   placeholder?: string;
   row?: number;
+  message?: string;
 }
 
 const ModalTextArea = ({
@@ -12,6 +13,7 @@ const ModalTextArea = ({
   label,
   placeholder,
   row,
+  message
 }: ModalTextAreaProp) => {
   return (
     <div className="w-full flex gap-5">
@@ -23,17 +25,19 @@ const ModalTextArea = ({
           {label}
         </label>
       )}
-
-      <textarea
-        id={label}
-        rows={row ? row : 2}
-        className="w-full bg-white
+      <div className="w-full">
+        <textarea
+          id={label}
+          rows={row ? row : 2}
+          className="w-full bg-white
     border-1 border-[var(--color-text-primary)]
     rounded-md text-[var(--color-text-primary)] p-2 placeholder-[var(--color-text-secondary)]"
-        placeholder={placeholder}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-      />
+          placeholder={placeholder}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+        />
+        {message && <p className="text-sm text-red-500">{message}</p>}  </div>
+
     </div>
   );
 };
