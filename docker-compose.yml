@@ -18,22 +18,8 @@ services:
     restart: always
     ports:
       - "3000:3000"
-    environment:
-      CHOKIDAR_USEPOLLING: "true"
-      WATCHPACK_POLLING: "true"
-      PORT: 3000
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_USER: ${POSTGRES_USER}
-      DB_PASSWORD: ${POSTGRES_PASSWORD}
-      DB_NAME: ${POSTGRES_DB}
-      JIRA_BASE_URL: ${JIRA_BASE_URL}
-      JIRA_PROJECT_KEY: ${JIRA_PROJECT_KEY}
-      JIRA_EMAIL: ${JIRA_EMAIL}
-      JIRA_API_TOKEN: ${JIRA_API_TOKEN}
-      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS}
     volumes:
-      - ./backend/src:/usr/src/app/src # Mount source code for live reload
+      - ./backend:/usr/src/app # Mount source code for live reload
       - /usr/src/app/node_modules # Prevent overwriting node_modules
     command: ["npm", "run", "dev"]
     depends_on:
@@ -45,10 +31,6 @@ services:
     restart: always
     ports:
       - "5173:5173" # or 3001 depending on your React dev server
-    environment:
-      VITE_YOUTUBE_CHANNEL_ID: ${VITE_YOUTUBE_CHANNEL_ID}
-      VITE_YOUTUBE_API_KEY: ${VITE_YOUTUBE_API_KEY}
-      VITE_APP_API_URL: http://localhost:3000
     volumes:
       - ./frontend:/app # mount source code
       - /app/node_modules # keep node_modules inside container
