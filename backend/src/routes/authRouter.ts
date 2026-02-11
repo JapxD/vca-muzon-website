@@ -2,6 +2,7 @@ import express from "express";
 import pool from "../config/db.js";
 import bcrypt from "bcrypt";
 import { authSchema } from "../schemas/authSchema.js";
+import jwt from "jsonwebtoken";
 
 const router = express.Router();
 
@@ -29,10 +30,22 @@ router.post("/login", async (req, res) => {
       return res.status(401).json({ error: "Invalid credentials" });
     }
 
+    // Generate a token
+    const token = jwt.sign(
+        { 
+            id: user.id, 
+            email: user.email, 
+            role: user.role 
+        }, // payload
+        process.env.JWT_SECRET as string, // secret key from .env
+        { expiresIn: "24h" } // expiry time
+    );
+
     // Success — issue token or session
     // For now, just return user info (excluding password)
     res.status(200).json({
       message: "Login successful",
+      token,
       user: {
         id: user.id,
         firstname: user.firstname,
