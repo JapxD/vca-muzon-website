@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import jiraRoutes from "./routes/jiraRouter.js";
+import userRoutes from "./routes/userRouter.js";
 
 dotenv.config();
 
@@ -32,5 +33,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/jira", jiraRoutes);
+
+app.use("/api/user", userRoutes);
 
 export default app;
