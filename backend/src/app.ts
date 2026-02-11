@@ -1,8 +1,11 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+
+// Import routes
 import jiraRoutes from "./routes/jiraRouter.js";
 import userRoutes from "./routes/userRouter.js";
+import authRoutes from "./routes/authRouter.js";
 
 dotenv.config();
 
@@ -35,5 +38,7 @@ app.get("/", (req, res) => {
 app.use("/api/jira", jiraRoutes);
 
 app.use("/api/user", userRoutes);
+
+app.use("/api/auth", authRoutes);
 
 export default app;
