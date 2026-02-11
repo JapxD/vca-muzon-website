@@ -8,7 +8,7 @@ import Modal from "./components/Modal.tsx";
 import ModalTextArea from "./components/ModalTextArea";
 import ModalInput from "./components/ModalInput";
 import Button from "./components/Button";
-import { suggestionSchema } from "./schemas/Suggestions.ts";
+import { suggestionSchema } from "./schemas/suggestionsSchema.ts";
 import { submitSuggestion } from "./services/jiraApi.ts";
 import Spinner from "./components/Spinner.tsx";
 
@@ -65,10 +65,6 @@ function App() {
       }
       
     }
-  };
-
-
-  const handleLogin = () => {
   };
 
   const navBarItems = [
