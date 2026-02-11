@@ -1,9 +1,7 @@
 import { Router } from "express";
 import type { Request, Response } from "express";
-import axios from "axios";
 import pool from "../config/db.js";
 import bcrypt from "bcrypt";
-import z from "zod";
 import { userSchema } from "../schemas/userSchema.js";
 
 
