@@ -1,12 +1,45 @@
 import React, { useState } from "react";
 import blessedToBless from "../assets/blessed-to-bless.jpg";
+import { authSchema } from "../schemas/authSchema";
+import { login } from "../services/authApi";
 
 const Login = ({}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    setMessage("");
+    const result = authSchema.safeParse({ email, password });
+    if (!result.success) {
+      const fieldErrors: Record<string, string> = {};
+      result.error.issues.forEach((issue) => {
+        const field = issue.path[0] as string;
+        fieldErrors[field] = issue.message;
+      });
+      setErrors(fieldErrors);
+      setMessage("❌ Invalid login. Please check the fields.");
+    } else {
+
+      try {
+        setLoading(true);
+        await login(email, password)
+        .then(({token, user}) => {
+          setMessage(`✅ Logged in as ${user.email}`);
+        });
+        
+        setEmail("");
+        setPassword("");
+      } catch (error: any) {
+        setMessage(`❌ Failed to login: ${error.message}`);
+      } finally {
+        setLoading(false);
+      }
+    }
   };
 
   return (
@@ -19,7 +52,7 @@ const Login = ({}) => {
 
       <div className="absolute inset-0 bg-[var(--color-primary-dark)]/80"></div>
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleLogin}
         className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md z-999"
       >
         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
@@ -48,6 +81,8 @@ const Login = ({}) => {
           />
         </div>
 
+        {loading && <p className="mb-4 text-blue-600">Logging in...</p>}
+        {message && <p className="mb-4">{message}</p>}
         <button
           type="submit"
           className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors"
