@@ -1,0 +1,29 @@
+GET http://localhost:3000/
+
+###
+
+POST http://localhost:3000/api/user
+Content-Type: application/json
+
+{
+  "firstname": "Jasper",
+  "lastname": "Garcia",
+  "email": "garciajapxds@gmail.com",
+  "password": "qwerty",
+  "role": "Leader"
+} 
+
+### 
+
+GET http://localhost:3000/api/user
+
+
+###
+
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "garciajaspermercado24@gmaisl.com",
+  "password": "073198J@p2"
+}
