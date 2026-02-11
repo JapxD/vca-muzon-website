@@ -1,5 +1,6 @@
 // Import the Pool class from node-postgres
 import { Pool } from 'pg';
+import 'dotenv/config';
 
 // Create a new pool instance with configuration
 const pool = new Pool({
