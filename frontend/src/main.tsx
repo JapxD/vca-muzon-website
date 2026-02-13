@@ -6,6 +6,7 @@ import App from "./App.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
+    {/* <BrowserRouter basename="/vca-muzon-website"> Needed only when deploying to github pages  */}
     <BrowserRouter>
       <App />
     </BrowserRouter>
