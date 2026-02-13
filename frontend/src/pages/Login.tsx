@@ -28,7 +28,7 @@ const Login = ({}) => {
       try {
         setLoading(true);
         await login(email, password)
-        .then(({token, user}) => {
+        .then(({user}) => {
           setMessage(`✅ Logged in as ${user.email}`);
         });
         
@@ -83,6 +83,8 @@ const Login = ({}) => {
 
         {loading && <p className="mb-4 text-blue-600">Logging in...</p>}
         {message && <p className="mb-4">{message}</p>}
+        {errors.email && <p className="mb-2 text-red-600">{errors.email}</p>}
+        {errors.password && <p className="mb-2 text-red-600">{errors.password}</p>} 
         <button
           type="submit"
           className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors"
