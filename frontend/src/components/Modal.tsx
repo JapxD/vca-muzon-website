@@ -16,10 +16,10 @@ const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
     >
       <div
         onClick={(e) => e.stopPropagation()} // So that it wont close when clicking the modal itself
-        className={`w-[90%] max-w-[999px] border-1 bg-white rounded-xl p-6 transition-all ${isOpen ? "scale-100 opacity-100" : "scale-125 opacity-0"}`}
+        className={`w-[90%] max-w-[600px] border-1 bg-white rounded-xl p-6 transition-all ${isOpen ? "scale-100 opacity-100" : "scale-125 opacity-0"}`}
       >
         {title && (
-          <h3 className="text-xl font-medium text-[var(--text-muted)]">
+          <h3 className="text-xl font-medium text-[var(--color-text-primary)]">
             {title}
           </h3>
         )}

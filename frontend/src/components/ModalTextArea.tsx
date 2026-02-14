@@ -20,7 +20,7 @@ const ModalTextArea = ({
       {label && (
         <label
           htmlFor={label}
-          className="text-[var(--text)] text-xl font-light"
+          className="text-[var(--color-text-primary)] text-xl font-light"
         >
           {label}
         </label>
