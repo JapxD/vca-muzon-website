@@ -17,7 +17,9 @@ router.post("/login", async (req, res) => {
 
   try {
     // Find user by email
-    const result = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+    const result = await pool.query("SELECT * FROM users WHERE email = $1", [
+      email,
+    ]);
     if (result.rows.length === 0) {
       return res.status(401).json({ error: "Invalid credentials" });
     }
@@ -32,13 +34,13 @@ router.post("/login", async (req, res) => {
 
     // Generate a token
     const token = jwt.sign(
-        { 
-            id: user.id, 
-            email: user.email, 
-            role: user.role 
-        }, // payload
-        process.env.JWT_SECRET as string, // secret key from .env
-        { expiresIn: "24h" } // expiry time
+      {
+        id: user.id,
+        email: user.email,
+        role: user.role,
+      }, // payload
+      process.env.JWT_SECRET as string, // secret key from .env
+      { expiresIn: "24h" }, // expiry time
     );
 
     // Success — issue token or session

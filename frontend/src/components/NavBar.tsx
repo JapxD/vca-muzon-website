@@ -4,7 +4,7 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 import NavBarItem from "../components/NavBarItem";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useScrolContext } from "../contexts/ScrollContext";
 
 import vcaLogo from "../assets/vca-logo.png";
@@ -23,14 +23,22 @@ interface NavBarProp {
 const NavBar = ({ navBarItems }: NavBarProp) => {
   const [barsOpen, setBarsOpen] = useState(false);
   const { heroVisible } = useScrolContext();
+  const locationPath = useLocation().pathname;
 
   return (
     <nav
-      className={`fixed w-full h-[98px] top-0 z-50 flex justify-between items-center shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] px-[50px] xl:px-[150px] ${heroVisible ? "bg-transparent text-white" : "bg-white text-[var(--color-text-primary)]"}`}
+      className={`fixed w-full h-[98px] top-0 z-50 flex justify-between items-center shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] px-[50px] xl:px-[150px] transition-color duration-300 ${heroVisible && (locationPath === "/" || locationPath === "/home" || locationPath === "/login") ? "bg-transparent text-white" : "bg-white text-[var(--color-text-primary)]"}`}
     >
       <Link to="/">
         <img
-          src={heroVisible ? vcaLogoWhite : vcaLogo}
+          src={
+            heroVisible &&
+            (locationPath === "/" ||
+              locationPath === "/home" ||
+              locationPath === "/login")
+              ? vcaLogoWhite
+              : vcaLogo
+          }
           className="w-30 md:w-50"
         />
       </Link>
@@ -59,7 +67,7 @@ const NavBar = ({ navBarItems }: NavBarProp) => {
 
       {/* Navbar Desktop */}
       <div
-        className={`hidden md:flex gap-15 lg:gap-25 w-full max-w-220 grow justify-end text-normal ${heroVisible ? "[&>a::after]:bg-white" : "[&>a::after]:bg-[var(--color-text-primary)]"}`}
+        className={`hidden md:flex gap-15 lg:gap-25 w-full max-w-220 grow justify-end text-normal ${heroVisible && (locationPath === "/" || locationPath === "/home" || locationPath === "/login") ? "[&>a::after]:bg-white" : "[&>a::after]:bg-[var(--color-text-primary)]"}`}
       >
         {navBarItems &&
           navBarItems.map((navBarItem) => (

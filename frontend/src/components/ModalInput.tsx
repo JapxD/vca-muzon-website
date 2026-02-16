@@ -11,7 +11,7 @@ const ModalInput = ({
   onChange,
   label,
   placeholder,
-  message
+  message,
 }: ModalInputProp) => {
   return (
     <div className="w-full flex items-center gap-5">
@@ -36,7 +36,6 @@ const ModalInput = ({
         />
         {message && <p className="text-sm text-red-500">{message}</p>}
       </div>
-
     </div>
   );
 };

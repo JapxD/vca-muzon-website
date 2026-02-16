@@ -1,5 +1,6 @@
 import FullImageHeroSection from "../sections/FullImageHeroSection";
 import InviteSection from "../sections/InviteSection";
+import JoinSection from "../sections/JoinSection";
 import ShareSection from "../sections/ShareSection";
 
 const Home = () => {
@@ -8,6 +9,7 @@ const Home = () => {
       <FullImageHeroSection />
       <InviteSection />
       <ShareSection />
+      <JoinSection />
     </div>
   );
 };

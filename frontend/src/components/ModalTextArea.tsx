@@ -13,7 +13,7 @@ const ModalTextArea = ({
   label,
   placeholder,
   row,
-  message
+  message,
 }: ModalTextAreaProp) => {
   return (
     <div className="w-full flex gap-5">
@@ -36,8 +36,8 @@ const ModalTextArea = ({
           value={value}
           onChange={(e) => onChange(e.target.value)}
         />
-        {message && <p className="text-sm text-red-500">{message}</p>}  </div>
-
+        {message && <p className="text-sm text-red-500">{message}</p>}{" "}
+      </div>
     </div>
   );
 };

@@ -10,45 +10,40 @@ router.post("/", async (req: Request, res: Response) => {
     const { summary, description } = req.body;
 
     if (!summary || !description) {
-      return res.status(400).json({ error: "Summary and description are required" });
+      return res
+        .status(400)
+        .json({ error: "Summary and description are required" });
     }
     const jiraDomain = process.env.JIRA_BASE_URL; // e.g. https://your-domain.atlassian.net
     const projectKey = process.env.JIRA_PROJECT_KEY;
     const email = process.env.JIRA_EMAIL;
     const apiToken = process.env.JIRA_API_TOKEN;
-    const auth = Buffer.from(`${email}:${apiToken}`).toString("base64"); // Example payload: you can map req.body into summary/description 
-    const payload = { 
-        fields: 
-        { 
-            project: { key: projectKey },
-            summary: req.body.summary || "Default suggestion title", description: {
-      type: "doc",
-      version: 1,
-      content: [
-        {
-          type: "paragraph",
+    const auth = Buffer.from(`${email}:${apiToken}`).toString("base64"); // Example payload: you can map req.body into summary/description
+    const payload = {
+      fields: {
+        project: { key: projectKey },
+        summary: req.body.summary || "Default suggestion title",
+        description: {
+          type: "doc",
+          version: 1,
           content: [
-            { type: "text", text: `Description: ${description}` }
-          ]
-        }
-      ]
-    },
-            issuetype: { name: "Story" } 
-        } 
+            {
+              type: "paragraph",
+              content: [{ type: "text", text: `Description: ${description}` }],
+            },
+          ],
+        },
+        issuetype: { name: "Story" },
+      },
     };
     // Send to Jira
-    const response = await axios.post( 
-        `${jiraDomain}/issue`, 
-        payload, 
-        { 
-            headers: { 
-                "Authorization": `Basic ${auth}`, 
-                "Accept": "application/json", 
-                "Content-Type": 
-                "application/json" 
-            } 
-        } 
-    );
+    const response = await axios.post(`${jiraDomain}/issue`, payload, {
+      headers: {
+        Authorization: `Basic ${auth}`,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
 
     res.status(201).json({
       message: "Suggestion submitted to Jira successfully",
@@ -56,7 +51,9 @@ router.post("/", async (req: Request, res: Response) => {
     });
   } catch (error: any) {
     console.error("Error creating Jira issue:", error.message);
-    res.status(500).json({ error: "Failed to submit suggestion to Jira:" + error.message });
+    res
+      .status(500)
+      .json({ error: "Failed to submit suggestion to Jira:" + error.message });
   }
 });
 
