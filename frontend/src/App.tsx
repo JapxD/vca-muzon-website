@@ -3,7 +3,6 @@ import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
 import Login from "./pages/Login.tsx";
 import { ScrollProvider } from "./contexts/ScrollContext.tsx";
-import Suggestions from "./components/Suggestions.tsx";
 
 
 function App() {
