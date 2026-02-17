@@ -3,7 +3,7 @@ import Socials from "../components/Socials";
 
 const ShareSection = () => {
   return (
-    <section className="w-full h-fit md:h-110 md:h-100 xl:h-150 flex flex-col sm:flex-row gap-10 overflow-visible xl:px-15 bg-[var(--color-primary)]   text-white">
+    <section className="w-full h-fit md:h-110 md:h-100 xl:h-150 flex flex-col sm:flex-row gap-10 overflow-visible xl:px-15 bg-[var(--color-primary)] text-white py-10 md:py-0   ">
       {/* Left Image */}
       <div className="hidden w-full lg:flex justify-center self-center md:h-[50%] 2xl:h-[70%]">
         <LatestSermon />
