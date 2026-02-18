@@ -55,6 +55,7 @@ router.post("/login", async (req, res) => {
         email: user.email,
         role: user.role,
       },
+      error: null,
     });
   } catch (err) {
     console.error(err);
