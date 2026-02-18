@@ -6,6 +6,7 @@ import { login } from "../services/authApi";
 import { useScrolContext } from "../contexts/ScrollContext";
 import { useInView } from "../hooks/useInView";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = ({}) => {
   const [email, setEmail] = useState("");
@@ -18,6 +19,8 @@ const Login = ({}) => {
 
   const { ref, isVisible } = useInView({ threshold: 0.2, once: false });
   const { setHeroVisible } = useScrolContext();
+
+  const navigate = useNavigate(); // hook for navigation
 
   useEffect(() => {
     setHeroVisible(isVisible);
@@ -37,19 +40,19 @@ const Login = ({}) => {
       setErrors(fieldErrors);
       setMessage("❌ Invalid login. Please check the fields.");
     } else {
-      try {
-        setLoading(true);
-        await login(email, password).then(({ user }) => {
-          setMessage(`✅ Logged in as ${user.email}`);
-        });
+      setErrors({});
+      setLoading(true);
+      const { error } = await login(email, password);
+      if (error) {
+        setMessage(`❌ Login failed: ${error}`);
+      } else {
+        setMessage("✅ Login successful!");
+        navigate("/dashboard");
 
         setEmail("");
         setPassword("");
-      } catch (error: any) {
-        setMessage(`❌ Failed to login: ${error.message}`);
-      } finally {
-        setLoading(false);
       }
+      setLoading(false);
     }
   };
 
@@ -81,6 +84,9 @@ const Login = ({}) => {
               placeholder="you@example.com"
               required
             />
+            {errors.email && (
+              <p className="mb-2 text-red-600">{errors.email}</p>
+            )}
           </div>
 
           <div className="mb-6">
@@ -93,14 +99,13 @@ const Login = ({}) => {
               placeholder="••••••••"
               required
             />
+            {errors.password && (
+              <p className="mb-2 text-red-600">{errors.password}</p>
+            )}
           </div>
 
           {loading && <p className="mb-4 text-blue-600">Logging in...</p>}
           {message && <p className="mb-4">{message}</p>}
-          {errors.email && <p className="mb-2 text-red-600">{errors.email}</p>}
-          {errors.password && (
-            <p className="mb-2 text-red-600">{errors.password}</p>
-          )}
           <button
             type="submit"
             className="w-full bg-[var(--color-primary)] text-white py-2 rounded-lg hover:bg-[var(--color-accent)] transition-colors"

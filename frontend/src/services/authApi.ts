@@ -3,21 +3,22 @@ import axios from "axios";
 export async function login(email: string, password: string) {
   try {
     const response = await axios.post(
-        `${import.meta.env.VITE_APP_API_URL}/auth/login`, // endpoint
-        { email, password }); // request body
-        
-    const { token, user } = response.data;
+      `${import.meta.env.VITE_APP_API_URL}/api/auth/login`, // endpoint
+      { email, password },
+    ); // request body
 
-    // Store token (simple example: localStorage)
-    localStorage.setItem("jwt", token);
+    const { token } = response.data;
 
-    console.log("Logged in as:", user);
-    
+    if (token) {
+      // Store token (simple example: localStorage)
+      localStorage.setItem("jwt", token);
+    }
+
     return response.data; // Return the full response data (token and user info)
   } catch (error: any) {
     console.error("Login failed:", error.response?.data || error.message);
+    return { error: error.response?.data?.error || error.message }; // Return error message for frontend handling
   }
-
 }
 
 // Attach token automatically for future requests
