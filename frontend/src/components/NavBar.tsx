@@ -46,7 +46,7 @@ const NavBar = () => {
 
       {/* Sidebar for mobile */}
       <div
-        className={`fixed md:hidden top-0 right-0 w-50 h-full flex flex-col text-small items-start justify-start bg-white text- gap-10 px-8 py-15
+        className={`fixed md:hidden top-0 right-0 w-50 h-full flex flex-col text-small items-start justify-start bg-white text- gap-   px-8 py-15
             z-999 transition-all duration-300 text-[var(--color-text-primary)] [&>a::after]:bg-[var(--color-text-primary)]
             ${barsOpen ? "translate-x-0 opacity-100 pointer-events-auto" : "translate-x-full opacity-0 pointer-events-none "}`}
       >
@@ -68,7 +68,7 @@ const NavBar = () => {
 
       {/* Navbar Desktop */}
       <div
-        className={`hidden md:flex gap-15 lg:gap-25 w-full max-w-220 grow justify-end text-normal ${heroVisible && (locationPath === "/" || locationPath === "/home" || locationPath === "/login") ? "[&>a::after]:bg-white" : "[&>a::after]:bg-[var(--color-text-primary)]"}`}
+        className={`hidden md:flex gap-10 xl :gap-15 lg:gap-15 w-full max-w-220 grow justify-end text-normal ${heroVisible && (locationPath === "/" || locationPath === "/home" || locationPath === "/login") ? "[&>a::after]:bg-white" : "[&>a::after]:bg-[var(--color-text-primary)]"}`}
       >
         {navBarItems &&
           navBarItems.map((navBarItem) => (
