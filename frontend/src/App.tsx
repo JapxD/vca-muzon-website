@@ -7,8 +7,6 @@ import ProtectedRoute from "./components/ProtectedRoute.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
 
 function App() {
-  const locationPath = useLocation().pathname;
-
   const routes = [
     {
       path: "/",
