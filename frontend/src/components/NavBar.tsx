@@ -10,20 +10,21 @@ import { useScrolContext } from "../contexts/ScrollContext";
 import vcaLogo from "../assets/vca-logo.png";
 import vcaLogoWhite from "../assets/vca-logo-white.png";
 
-interface NavBarItemType {
-  title: string;
-  to: string;
-}
-
-interface NavBarProp {
-  logo?: string;
-  navBarItems?: NavBarItemType[];
-}
-
-const NavBar = ({ navBarItems }: NavBarProp) => {
+const NavBar = () => {
   const [barsOpen, setBarsOpen] = useState(false);
   const { heroVisible } = useScrolContext();
   const locationPath = useLocation().pathname;
+
+  const navBarItems = [
+    {
+      title: "Home",
+      to: "/",
+    },
+    { title: "Who we are", to: "/who-we-are" },
+    { title: "Online", to: "/online" },
+    { title: "Give", to: "/give" },
+    { title: "Login", to: "/login" },
+  ];
 
   return (
     <nav
@@ -43,7 +44,7 @@ const NavBar = ({ navBarItems }: NavBarProp) => {
         />
       </Link>
 
-      {/* Sidebard for mobile */}
+      {/* Sidebar for mobile */}
       <div
         className={`fixed md:hidden top-0 right-0 w-50 h-full flex flex-col text-small items-start justify-start bg-white text- gap-10 px-8 py-15
             z-999 transition-all duration-300 text-[var(--color-text-primary)] [&>a::after]:bg-[var(--color-text-primary)]

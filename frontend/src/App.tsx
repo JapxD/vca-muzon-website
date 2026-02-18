@@ -1,36 +1,73 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
 import Login from "./pages/Login.tsx";
 import { ScrollProvider } from "./contexts/ScrollContext.tsx";
-
+import ProtectedRoute from "./components/ProtectedRoute.tsx";
+import Dashboard from "./pages/Dashboard.tsx";
 
 function App() {
-
-  const navBarItems = [
-    {
-      title: "Home",
-      to: "/",
-    },
-    { title: "Who we are", to: "/who-we-are" },
-    { title: "Online", to: "/online" },
-    { title: "Give", to: "/give" },
-    { title: "Login", to: "/login" },
-  ];
+  const locationPath = useLocation().pathname;
 
   const routes = [
-    { path: "/", element: <Home /> },
-    { path: "/who-we-are" },
-    { path: "/online" },
-    { path: "/give" },
-    { path: "/login", element: <Login /> },
+    {
+      path: "/",
+      element: (
+        <>
+          <NavBar />
+          <Home />
+        </>
+      ),
+    },
+    {
+      path: "/who-we-are",
+      element: (
+        <>
+          <NavBar />
+          <div>Who we are</div>
+        </>
+      ),
+    },
+    {
+      path: "/online",
+      element: (
+        <>
+          <NavBar />
+          <div>Online</div>
+        </>
+      ),
+    },
+    {
+      path: "/give",
+      element: (
+        <>
+          <NavBar />
+          <div>Give</div>
+        </>
+      ),
+    },
+    {
+      path: "/login",
+      element: (
+        <>
+          <NavBar />
+          <Login />
+        </>
+      ),
+    },
+    {
+      path: "/dashboard",
+      element: (
+        <ProtectedRoute>
+          <Dashboard />
+        </ProtectedRoute>
+      ),
+    },
   ];
 
   return (
     <>
       <ScrollProvider>
-        <NavBar navBarItems={navBarItems} />
-
         {/* Routes */}
         <div className={`w-full z-1 overflow-hidden`}>
           <Routes>
