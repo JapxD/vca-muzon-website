@@ -68,7 +68,7 @@ const Login = ({}) => {
         <div className="absolute inset-0 bg-[var(--color-primary-dark)]/80"></div>
         <form
           onSubmit={handleLogin}
-          className="shadow-lg border border-[var(--color-primary)] bg-white rounded-lg p-8 w-full max-w-md z-999 text-[var(--color-primary)]"
+          className="shadow-lg border border-[var(--color-primary)] bg-white rounded-lg p-8 w-[90%] max-w-md z-20 text-[var(--color-primary)]"
         >
           <h2 className="text-2xl font-bold mb-6 text-center font-[var(--font-body)]">
             Login

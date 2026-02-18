@@ -3,9 +3,10 @@ import { NavLink } from "react-router-dom";
 interface NavBarItemProp {
   title: string;
   to: string;
+  onClick?: () => void;
 }
 
-const NavBarItem = ({ title, to }: NavBarItemProp) => {
+const NavBarItem = ({ title, to, onClick }: NavBarItemProp) => {
   return (
     <NavLink
       className={({
@@ -15,6 +16,7 @@ const NavBarItem = ({ title, to }: NavBarItemProp) => {
     ${isActive ? "after:w-full after:opacity-100" : "after:w-0 after:opacity-0"}
 `}
       to={to}
+      onClick={onClick}
     >
       {title}
     </NavLink>
